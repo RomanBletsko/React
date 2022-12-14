@@ -1,13 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import styled from "styled-components";
+import { Header, Baner, Main, Aside } from "./components";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+function BurgerApp() {
+  return (
+    <Body>
+      <Header />
+      <Baner />
+      <Main />
+      <Aside />
+    </Body>
+  );
+}
+const Body = styled.div({
+  backgroundColor: "#fff",
+  margin: 0,
+  width: "1211px",
+  padding: "10px",
+  display: "flex",
+  gap: "20px",
+  flexWrap: "wrap",
+  justifyContent: "space-between",
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <BurgerApp />
   </React.StrictMode>
 );
 
