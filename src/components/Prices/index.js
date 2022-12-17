@@ -11,7 +11,11 @@ function Prices(props) {
       <PricesList>
         {ingradientArr.map((element) => (
           <PricesItem>
-            <Ingredient name={element.name} price={element.price} />
+            <Ingredient
+              name={element.name}
+              price={element.price}
+              key={element.name}
+            />
           </PricesItem>
         ))}
       </PricesList>
