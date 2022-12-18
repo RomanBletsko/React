@@ -4,7 +4,7 @@ import image from "./img/logo1.png";
 function Logo() {
   return (
     <LogoWraper>
-      <a href="google.com">
+      <a href="">
         <img src={image} alt="Logo" />
       </a>
     </LogoWraper>

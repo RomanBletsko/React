@@ -4,9 +4,9 @@ import Button from "./Button";
 function Menu() {
   return (
     <MenuList>
-      <Button value={"Home"} active={true} />
-      <Button value={"Order"} />
-      <Button value={"FAQ"} />
+      <Button value="Home" active={true} />
+      <Button value="Order" />
+      <Button value="FAQ" />
     </MenuList>
   );
 }

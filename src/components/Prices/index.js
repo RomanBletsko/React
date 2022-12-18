@@ -2,17 +2,19 @@ import styled from "styled-components";
 import Ingredient from "./Ingredient";
 
 function Prices(props) {
-  const ingradientArr = props.property;
+  const ingredientArr = props.property;
 
   return (
     <Wraper>
       <Tittle>Our prices</Tittle>
 
       <PricesList>
-        {ingradientArr.map((element) => (
-          <PricesItem>
-            <Ingredient name={element.name} price={element.price} />
-          </PricesItem>
+        {ingredientArr.map((element, index) => (
+          <Ingredient
+            name={element.name}
+            price={element.price}
+            key={element.name + index}
+          />
         ))}
       </PricesList>
     </Wraper>
@@ -30,9 +32,6 @@ const PricesList = styled.ul({
   listStyle: "none",
   padding: "0",
   textAlign: "center",
-});
-const PricesItem = styled.li({
-  margin: "10px",
 });
 
 export default Prices;

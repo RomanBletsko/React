@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import Burger from "./Burger";
 function Main(props) {
-  const { prop } = props;
+  const { price } = props;
   return (
-    <Wraper>
-      <Tittle>Burger price: {prop} ₴</Tittle>
+    <Wrapper>
+      <Tittle>Burger price: {price} ₴</Tittle>
       <Btn>Checout</Btn>
       <Burger></Burger>
-    </Wraper>
+    </Wrapper>
   );
 }
-const Wraper = styled.div({
+const Wrapper = styled.div({
   height: " 100%",
   background: "#312F30",
   textAlign: "center",
