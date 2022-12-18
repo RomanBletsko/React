@@ -3,18 +3,18 @@ import Ingredient from "./Ingredient";
 
 function Prices(props) {
   const ingradientArr = props.property;
-
+  console.log(ingradientArr);
   return (
     <Wraper>
       <Tittle>Our prices</Tittle>
 
       <PricesList>
-        {ingradientArr.map((element) => (
-          <PricesItem>
+        {ingradientArr.map((element, index) => (
+          <PricesItem key={element.name + "Item"}>
             <Ingredient
               name={element.name}
               price={element.price}
-              key={element.name}
+              key={element.name + index}
             />
           </PricesItem>
         ))}
