@@ -3,12 +3,12 @@ import styled from "styled-components";
 function Ingredient(props) {
   const { name, price } = props;
   return (
-    <PriceSpan>
+    <PriceItem>
       {name}: {price} ₴
-    </PriceSpan>
+    </PriceItem>
   );
 }
-const PriceSpan = styled.span({
+const PriceItem = styled.li({
   color: "#fff",
   margin: "20px,",
 });
