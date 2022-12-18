@@ -9,7 +9,7 @@ function Ingredient(props) {
   );
 }
 const PriceItem = styled.li({
+  padding: "10px",
   color: "#fff",
-  margin: "20px,",
 });
 export default Ingredient;

@@ -12,8 +12,9 @@ const ingredients = [
   { name: "Pickle", price: 1.25 },
   { name: "Meat", price: 0.75 },
 ];
-let burgerPrice = 0;
+
 function BurgerApp() {
+  let burgerPrice = 0;
   return (
     <Body>
       <BodyWraper>
