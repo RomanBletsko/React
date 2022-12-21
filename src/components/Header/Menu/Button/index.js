@@ -4,7 +4,7 @@ function MenuButton(props) {
   const { value, active } = props;
 
   return (
-    <li className="menuItem">
+    <li>
       <button className={active ? "btnActive" : "menuBtn"}>{value}</button>
     </li>
   );

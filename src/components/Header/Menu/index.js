@@ -6,6 +6,7 @@ function Menu() {
     <MenuList>
       <Button value="Home" active={true} />
       <Button value="Order" />
+      <Button value="Contacts" />
       <Button value="FAQ" />
     </MenuList>
   );

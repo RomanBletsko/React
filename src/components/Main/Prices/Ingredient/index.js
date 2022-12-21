@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-function Ingredient(props) {
-  const { name, price } = props;
+function Ingredient({ name, price }) {
   return (
     <PriceItem>
       {name}: {price} ₴

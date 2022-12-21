@@ -1,38 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import backgrounImg from "./assets/bg.jpg";
 import reportWebVitals from "./reportWebVitals";
 import styled from "styled-components";
-import { Header, Main, Prices } from "./components";
-
-const ingredients = [
-  { name: "Bacon", price: 0.75 },
-  { name: "Cheese", price: 1.7 },
-  { name: "Salad", price: 0.95 },
-  { name: "Pickle", price: 1.25 },
-  { name: "Meat", price: 0.75 },
-];
+import { Header, Main } from "./components";
 
 function BurgerApp() {
-  let burgerPrice = 0;
   return (
     <Body>
-      <BodyWraper>
+      <BodyWrapper>
         <Header />
-        <MainWrapper>
-          <Prices property={ingredients} />
-          <Main price={burgerPrice} />
-        </MainWrapper>
-      </BodyWraper>
+        <Main />
+      </BodyWrapper>
     </Body>
   );
 }
 const Body = styled.div({
   width: "100%",
   height: "100vh",
-  background: "#1C1C1C",
+  backgroundImage: `url(${backgrounImg})`,
 });
-const BodyWraper = styled.div({
+// "#1C1C1C"
+const BodyWrapper = styled.div({
   margin: "0 auto",
   width: "1211px",
   padding: "20px",
@@ -41,12 +31,12 @@ const BodyWraper = styled.div({
   flexWrap: "wrap",
   justifyContent: "space-between",
 });
-const MainWrapper = styled.div({
-  width: "100%",
-  height: "600px",
-  display: "grid",
-  gridTemplateColumns: "15% 70% 15%",
-});
+// const MainWrapper = styled.div({
+//   width: "100%",
+//   height: "600px",
+//   display: "grid",
+//   gridTemplateColumns: "15% 70% 15%",
+// });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

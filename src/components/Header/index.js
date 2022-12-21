@@ -15,7 +15,7 @@ function Header() {
 const HeaderStyled = styled.section({
   width: "100%",
   height: "100px",
-  background: "#312F30",
+  background: "rgba(49, 47, 48, 0.8)",
   padding: "0 20px",
   display: "flex",
   justifyContent: "space-between",
@@ -24,6 +24,7 @@ const HeaderStyled = styled.section({
   boxShadow: "7px 10px 5px #fa5f064d",
 });
 const Tittle = styled.h2({
+  paddingLeft: "160px",
   color: "#FF6B0B",
   fontSize: "36px",
 });
