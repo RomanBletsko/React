@@ -18,9 +18,9 @@ function Controls({
           <Tittle>Our prices</Tittle>
           {}
           <ControlsList>
-            {ingredients.map((element, index) => {
+            {ingredients.map((element) => {
               return (
-                <ControlsItem key={element + index}>
+                <ControlsItem key={element + "Item"}>
                   <SingleControl
                     name={element}
                     quantitie={quantities[element]}

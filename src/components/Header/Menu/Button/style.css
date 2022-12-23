@@ -1,4 +1,4 @@
-.menuBtn{
+.menuBtn {
     color: #FF6B0B;
     text-decoration: none;
     font-weight: 800;
@@ -9,12 +9,12 @@
 
 
 }
-.menuBtn:hover{
+.menuBtn:hover {
     scale: 120%;
     cursor: pointer;
     
 }
-.btnActive{
+.btnActive {
     position: relative;
     cursor: pointer;
     color: #FF6B0B;
@@ -24,7 +24,7 @@
     background: none;font-size: 16px;
     text-shadow: 5px 5px 10px #00000083;
 }
-.btnActive::after{
+.btnActive::after {
     position:absolute;
     content: "";
     display: block;

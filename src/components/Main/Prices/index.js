@@ -11,11 +11,11 @@ function Prices({ ingredientArr, loading }) {
         <Div>
           <Tittle>Our prices</Tittle>
           <PricesList>
-            {ingredientArr.map((element, index) => (
+            {ingredientArr.map((element) => (
               <Ingredient
                 name={element.name}
                 price={element.price}
-                key={element.name + index}
+                key={element.name + "Price"}
               />
             ))}
           </PricesList>

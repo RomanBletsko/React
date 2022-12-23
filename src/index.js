@@ -20,6 +20,7 @@ const Body = styled.div({
   width: "100%",
   height: "100vh",
   backgroundImage: `url(${backgrounImg})`,
+  backgroundSize: "cover",
 });
 // "#1C1C1C"
 const BodyWrapper = styled.div({
@@ -31,12 +32,6 @@ const BodyWrapper = styled.div({
   flexWrap: "wrap",
   justifyContent: "space-between",
 });
-// const MainWrapper = styled.div({
-//   width: "100%",
-//   height: "600px",
-//   display: "grid",
-//   gridTemplateColumns: "15% 70% 15%",
-// });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

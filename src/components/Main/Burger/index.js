@@ -1,52 +1,49 @@
 import styled from "styled-components";
 import backGroundImg from "../../../assets/bg.jpg";
-import Loader from "../Loader";
-function Burger({ totalPrice, ingredientAddingOrder, loading }) {
+
+function Burger({ totalPrice, ingredientAddingOrder }) {
   const positionTopBun = ingredientAddingOrder.length
-    ? 115 + 25 * ingredientAddingOrder.length
-    : 260;
+    ? 115 + 20 * ingredientAddingOrder.length
+    : 150;
   const zIndexTopBun = ingredientAddingOrder.length + 1;
   return (
     <div>
-      {loading ? (
-        <Loader />
-      ) : (
-        <Div>
-          <Tittle>Burger price: {totalPrice} ₴</Tittle>
-          <BurgerWrapper>
-            <TopBun
-              src={require("../../../assets/products/top_bun.png")}
-              alt="Top bun"
-              style={{
-                bottom: positionTopBun,
-                zIndex: zIndexTopBun,
-              }}
-            />
-            {!ingredientAddingOrder.length && (
-              <Paragraph>Start by adding ingredients to your burger</Paragraph>
-            )}
+      <Div>
+        <Tittle>Burger price: {totalPrice} ₴</Tittle>
+        <BurgerWrapper>
+          <TopBun
+            src={require("../../../assets/products/top_bun.png")}
+            alt="Top bun"
+            style={{
+              bottom: positionTopBun,
+              zIndex: zIndexTopBun,
+            }}
+          />
+          {!ingredientAddingOrder.length && (
+            <Paragraph>Start by adding ingredients to your burger</Paragraph>
+          )}
 
-            {ingredientAddingOrder.map((product, index) => {
-              return (
-                <ProductIMGStyled
-                  key={product + index}
-                  src={require(`../../../assets/products/${product}.png`)}
-                  alt={product}
-                  style={{
-                    bottom: 95 + index * 25,
-                    zIndex: index + 1,
-                  }}
-                />
-              );
-            })}
-            <BottomBun
-              src={require("../../../assets/products/bottom_bun.png")}
-              alt="Bottom bun"
-            />
-          </BurgerWrapper>
+          {ingredientAddingOrder.map((product, index) => {
+            return (
+              <ProductIMGStyled
+                key={product + index * 2}
+                src={require(`../../../assets/products/${product}.png`)}
+                alt={product}
+                style={{
+                  bottom: 95 + index * 20,
+                  zIndex: index + 1,
+                }}
+              />
+            );
+          })}
+          <BottomBun
+            src={require("../../../assets/products/bottom_bun.png")}
+            alt="Bottom bun"
+          />
+        </BurgerWrapper>
 
-          <Btn>Checout</Btn>
-        </Div>
+        <Btn>Checkout</Btn>
+      </Div>
       )}
     </div>
   );
@@ -59,6 +56,7 @@ const Div = styled.div({
   flexDirection: "column",
   alignItems: "center",
   backgroundImage: `url(${backGroundImg})`,
+  backgroundSize: "cover",
   borderRadius: "15px",
 });
 const Tittle = styled.h3({
@@ -66,7 +64,7 @@ const Tittle = styled.h3({
 });
 const Paragraph = styled.p({
   position: "absolute",
-  top: "51%",
+  top: "30%",
   color: "#FF6B0B",
 });
 const BurgerWrapper = styled.div({
