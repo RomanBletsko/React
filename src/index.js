@@ -15,7 +15,7 @@ function BurgerApp() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route id="1" path="/" element={<Main />} />
+            <Route id="1" path="React/" element={<Main />} />
             <Route id="2" path="/orders" element={<Orders />} />
             <Route id="3" path="/contacts" element={<Contact />} />
             <Route id="4" path="/faq" element={<FAQ />} />
