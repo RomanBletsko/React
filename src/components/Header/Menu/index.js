@@ -2,12 +2,12 @@ import styled from "styled-components";
 import Button from "./Button";
 
 function Menu() {
+  const menuItems = ["Home", "Orders", "Contacts", "FAQ"];
   return (
     <MenuList>
-      <Button value="Home" active={true} />
-      <Button value="Order" />
-      <Button value="Contacts" />
-      <Button value="FAQ" />
+      {menuItems.map((element) => {
+        return <Button key={element + "-menu-items"}>{element}</Button>;
+      })}
     </MenuList>
   );
 }

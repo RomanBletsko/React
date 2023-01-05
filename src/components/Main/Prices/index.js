@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Loader from "../Loader";
 import Ingredient from "./Ingredient";
 
-function Prices({ ingredientArr, loading }) {
+function Prices({ ingredientsArr, loading }) {
   return (
     <Wraper>
       {loading ? (
@@ -11,7 +11,7 @@ function Prices({ ingredientArr, loading }) {
         <Div>
           <Tittle>Our prices</Tittle>
           <PricesList>
-            {ingredientArr.map((element) => (
+            {ingredientsArr.map((element) => (
               <Ingredient
                 name={element.name}
                 price={element.price}

@@ -1,135 +1,127 @@
-import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 import Burger from "./Burger";
 import Prices from "./Prices";
 import Controls from "./Controls";
+import Modal from "./Modal";
+import { useState, useEffect } from "react";
+import { getPrices } from "../../Utils/Apis";
 
-class Main extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      loading: false,
-      prices: [],
-      ingredients: [],
-      ingredientAddingOrder: [],
-      burgerCreator: {},
-      orderPrice: "1.00",
+const Main = () => {
+  const [modalActive, setModalActive] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [ingredientsArr, setIngredientsArr] = useState([]);
+  const [prices, setPrices] = useState([]);
+  const [ingredientAddingOrder, setIngredientAddingOrder] = useState([]);
+  const [orderPrice, setOrderPrice] = useState("1.00");
+  const [burgerCreator, setBurgerCreator] = useState({});
+
+  useEffect(() => {
+    const responce = async () => {
+      setLoading(true);
+      try {
+        const { data } = await getPrices();
+
+        const ingredients = data.map((ingredient) => {
+          return ingredient.name;
+        });
+        const quantitie = data.reduce(
+          (acc, curr) => ({ [curr.name]: 0, ...acc }),
+          {}
+        );
+        setIngredientsArr(ingredients);
+        setPrices(data);
+        setBurgerCreator(quantitie);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
     };
-  }
+    responce();
+  }, []);
 
-  componentDidMount = async () => {
-    try {
-      this.setState({ loading: true });
-      const { data } = await axios.get(
-        "https://burger-api-xcwp.onrender.com/ingredients"
-      );
-      const ingredients = data.map((ingredient) => {
-        return ingredient.name;
-      });
-      const quantities = data.reduce(
-        (acc, curr) => ({ [curr.name]: 0, ...acc }),
-        {}
-      );
-
-      this.setState({
-        prices: data,
-        ingredients: ingredients,
-        burgerCreator: quantities,
-        loading: false,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  findPrice = (ingredient) => {
-    return this.state.prices.find((element) => element.name === ingredient)
-      .price;
-  };
-  clearOrder = () => {
+  const clearOrder = () => {
     const clearedBurgerCreator = {};
-    for (const ingredient in this.state.burgerCreator) {
+    for (const ingredient in burgerCreator) {
       clearedBurgerCreator[ingredient] = 0;
     }
-    if (this.state.ingredientAddingOrder.length !== 0) {
-      this.setState({
-        burgerCreator: clearedBurgerCreator,
-        ingredientAddingOrder: [],
-        orderPrice: "1.00",
-      });
+    if (ingredientAddingOrder.length !== 0) {
+      setBurgerCreator(clearedBurgerCreator);
+      setIngredientAddingOrder([]);
+      setOrderPrice("1.00");
     }
   };
-
-  changingAmountOfIngredients = (event) => {
+  const findPrice = (ingredient) => {
+    return prices.find((element) => element.name === ingredient).price;
+  };
+  const changingAmountOfIngredients = (event) => {
     const actionIngredient = event.target.dataset["ingredient"];
     const actionClicked = event.target.dataset["action"];
-
-    this.setState((prevState) => {
-      const copyBurgerCreator = { ...prevState.burgerCreator };
-      let newPrice = +prevState.orderPrice;
-      const newIngredientAddingOrder = [...prevState.ingredientAddingOrder];
-
-      if (actionClicked === "decrement") {
-        if (!copyBurgerCreator[actionIngredient] <= 0) {
-          copyBurgerCreator[actionIngredient] -= 1;
-          newPrice -= this.findPrice(actionIngredient);
-          newIngredientAddingOrder.splice(
-            newIngredientAddingOrder.findLastIndex(
-              (element) => element === actionIngredient
-            ),
-            1
-          );
-        }
+    const copyBurgerCreator = { ...burgerCreator };
+    let newPrice = +orderPrice;
+    const newIngredientAddingOrder = [...ingredientAddingOrder];
+    if (actionClicked === "decrement") {
+      if (!copyBurgerCreator[actionIngredient] <= 0) {
+        copyBurgerCreator[actionIngredient] -= 1;
+        newPrice -= findPrice(actionIngredient);
+        newIngredientAddingOrder.splice(
+          newIngredientAddingOrder.findLastIndex(
+            (element) => element === actionIngredient
+          ),
+          1
+        );
       }
-      if (actionClicked === "increment") {
-        if (
-          copyBurgerCreator[actionIngredient] < 5 &&
-          newIngredientAddingOrder.length < 10
-        ) {
-          copyBurgerCreator[actionIngredient] += 1;
+    }
+    if (actionClicked === "increment") {
+      if (
+        copyBurgerCreator[actionIngredient] < 5 &&
+        newIngredientAddingOrder.length < 10
+      ) {
+        copyBurgerCreator[actionIngredient] += 1;
 
-          newPrice += this.findPrice(actionIngredient);
+        newPrice += findPrice(actionIngredient);
 
-          newIngredientAddingOrder.push(actionIngredient);
-        }
+        newIngredientAddingOrder.push(actionIngredient);
       }
-      return {
-        ...prevState, // works without it
-        burgerCreator: copyBurgerCreator,
-        orderPrice: newPrice.toFixed(2),
-        ingredientAddingOrder: newIngredientAddingOrder,
-      };
-    });
+    }
+
+    setBurgerCreator(copyBurgerCreator);
+    setIngredientAddingOrder(newIngredientAddingOrder);
+    setOrderPrice(newPrice.toFixed(2));
+  };
+  const openCloseModal = () => {
+    const newmodalActive = modalActive;
+
+    setModalActive(newmodalActive ? false : true);
   };
 
-  render() {
-    const {
-      prices,
-      orderPrice,
-      ingredients,
-      burgerCreator,
-      ingredientAddingOrder,
-      loading,
-    } = this.state;
-    return (
-      <Wrapper>
-        <Prices ingredientArr={prices} loading={loading} />
-        <Burger
-          totalPrice={orderPrice}
-          ingredientAddingOrder={ingredientAddingOrder}
-          loading={loading}
-        />
-        <Controls
-          loading={loading}
-          ingredients={ingredients}
-          quantities={burgerCreator}
-          updateBurger={this.changingAmountOfIngredients}
-          clearAll={this.clearOrder}
-        />
-      </Wrapper>
-    );
-  }
-}
+  return (
+    <Wrapper>
+      <Prices ingredientsArr={prices} loading={loading} />
+      <Burger
+        totalPrice={orderPrice}
+        ingredientAddingOrder={ingredientAddingOrder}
+        loading={loading}
+        openModal={openCloseModal}
+      />
+      <Controls
+        loading={loading}
+        ingredients={ingredientsArr}
+        quantities={burgerCreator}
+        updateBurger={changingAmountOfIngredients}
+        clearAll={clearOrder}
+      />
+      <Modal
+        modalActive={modalActive}
+        cancel={openCloseModal}
+        ingredients={ingredientsArr}
+        quantities={burgerCreator}
+        totalPrice={orderPrice}
+        clearBurger={clearOrder}
+      />
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div({
   width: "100%",

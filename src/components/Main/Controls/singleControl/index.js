@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import Image from "../../Image";
 const SingleControl = ({ name, quantitie, updateBurger }) => {
   return (
     <Div onClick={updateBurger}>
@@ -10,11 +10,7 @@ const SingleControl = ({ name, quantitie, updateBurger }) => {
       <Increment data-action="increment" data-ingredient={name}>
         +
       </Increment>
-      <ImageStyled
-        src={require(`../../../../assets/ingredients/${name}.png`)}
-        key={"image_" + name}
-        alt={name}
-      />
+      <Image name={name}></Image>
     </Div>
   );
 };
@@ -24,10 +20,7 @@ const Div = styled.div({
   justifyContent: "space-between",
   alignItems: "center",
 });
-const ImageStyled = styled.img({
-  width: "32px",
-  padding: "0",
-});
+
 const Decrement = styled.button({
   border: "1px solid #fff",
   backgroundColor: "transparent",

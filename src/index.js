@@ -5,13 +5,25 @@ import backgrounImg from "./assets/bg.jpg";
 import reportWebVitals from "./reportWebVitals";
 import styled from "styled-components";
 import { Header, Main } from "./components";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Contact, FAQ, NotFound, Orders } from "./Pages";
 
 function BurgerApp() {
   return (
     <Body>
       <BodyWrapper>
-        <Header />
-        <Main />
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/contacts" element={<Contact />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+        {/* 
+        <Main /> */}
       </BodyWrapper>
     </Body>
   );

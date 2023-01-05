@@ -6,13 +6,11 @@
     background: none;
     font-size: 16px;
     text-shadow: 5px 5px 10px #00000083;
-
-
 }
 .menuBtn:hover {
-    scale: 120%;
-    cursor: pointer;
-    
+    display:inline-block;
+    cursor: pointer; 
+    transform: scale(1.2); 
 }
 .btnActive {
     position: relative;

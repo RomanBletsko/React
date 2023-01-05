@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import backGroundImg from "../../../assets/bg.jpg";
 
-function Burger({ totalPrice, ingredientAddingOrder }) {
+function Burger({ totalPrice, ingredientAddingOrder, openModal }) {
   const positionTopBun = ingredientAddingOrder.length
     ? 115 + 20 * ingredientAddingOrder.length
     : 150;
@@ -42,9 +42,9 @@ function Burger({ totalPrice, ingredientAddingOrder }) {
           />
         </BurgerWrapper>
 
-        <Btn>Checkout</Btn>
+        <Btn onClick={openModal}>Checkout</Btn>
       </Div>
-      )}
+      {/* )} */}
     </div>
   );
 }
