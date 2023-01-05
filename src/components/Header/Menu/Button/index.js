@@ -7,7 +7,7 @@ function MenuButton({ children }) {
     <ItemStyled>
       <NavLink
         className={({ isActive }) => (isActive ? "btnActive" : "menuBtn")}
-        to={children.toLowerCase()}>
+        to={children === "Home" ? "React/" : `React/${children.toLowerCase()}`}>
         {children.toUpperCase()}
       </NavLink>
     </ItemStyled>
