@@ -50,6 +50,7 @@ const OrderDetails = ({ quantities, totalPrice, clearBurger, cancel }) => {
     try {
       setLoading(true);
       await createOrder(orderData);
+      console.log(orderData);
       setOrderCreateStatus(true);
       clearBurger();
       setErrorStatus(false);

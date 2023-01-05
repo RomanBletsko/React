@@ -15,11 +15,11 @@ function BurgerApp() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/contacts" element={<Contact />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="*" element={<NotFound />} />
+            <Route id="1" path="/" element={<Main />} />
+            <Route id="2" path="/orders" element={<Orders />} />
+            <Route id="3" path="/contacts" element={<Contact />} />
+            <Route id="4" path="/faq" element={<FAQ />} />
+            <Route id="5" path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
         {/* 
