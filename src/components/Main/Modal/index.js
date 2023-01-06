@@ -46,7 +46,7 @@ const ContentConteiner = styled.div`
   padding: 10px;
   box-sizing: border-box;
   display: flex;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   justify-content: end;
   align-items: center;
   flex-direction: column;
@@ -56,14 +56,9 @@ const ContentConteiner = styled.div`
   transform: ${(props) =>
     props.className === "activeCont" ? "scale(1)" : "scale(0)"};
   transition: 0.5s;
-
   background: #fff;
 `;
-// background-image: linear-gradient(
-//     to bottom,
-//     rgba(200, 200, 255, 0.1),
-//     rgba(255, 255, 255, 0.4)
-//   ),
+
 const BoxStyled = styled.div({});
 
 export default Modal;

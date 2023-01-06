@@ -33,7 +33,7 @@ const Contact = () => {
           {contact.map((el) => {
             return (
               <li key={el[0]}>
-                <span>{el[0]}</span>
+                <span>{el[0]}: </span>
                 <span>{el[1]}</span>
               </li>
             );

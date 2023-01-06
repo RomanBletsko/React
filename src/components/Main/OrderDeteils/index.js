@@ -21,13 +21,13 @@ const OrderDetails = ({ quantities, totalPrice, clearBurger, cancel }) => {
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
   const [orderCreateStatus, setOrderCreateStatus] = useState(false);
-  const [errorStatus, setErrorStatus] = useState(false);
+  const [sendOrderStatus, setSendOrderStatus] = useState(false);
 
   const burgerComponents = Object.entries(quantities).filter((el) => el[1]);
 
   const orderWindowClesed = () => {
     cancel();
-    setErrorStatus(false);
+    setSendOrderStatus(false);
     setOrderCreateStatus(false);
   };
   const handleOrder = async (data) => {
@@ -49,20 +49,18 @@ const OrderDetails = ({ quantities, totalPrice, clearBurger, cancel }) => {
 
     try {
       setLoading(true);
-      await createOrder(orderData);
-      console.log(orderData);
       setOrderCreateStatus(true);
+      await createOrder(orderData);
+      setLoading(false);
+      setSendOrderStatus(true);
       clearBurger();
-      setErrorStatus(false);
-      setLoading(false);
     } catch (error) {
-      setErrorStatus(true);
       setLoading(false);
+      setSendOrderStatus(false);
       console.error(error);
-      setOrderCreateStatus(false);
     }
   };
-
+  // console.log(error);
   return (
     <WrapperStyled>
       {orderCreateStatus ? (
@@ -71,8 +69,16 @@ const OrderDetails = ({ quantities, totalPrice, clearBurger, cancel }) => {
             <Loader />
           ) : (
             <StatusBox>
-              <TittleStyled>Order success!</TittleStyled>
-              <Button onClick={orderWindowClesed} style={style}>
+              <TittleStyled className={sendOrderStatus ? "done" : null}>
+                {sendOrderStatus
+                  ? "Order successfully created!"
+                  : "Something went wrong!"}
+              </TittleStyled>
+
+              <Button
+                onClick={orderWindowClesed}
+                style={style}
+                variant="contained">
                 Ok
               </Button>
             </StatusBox>
@@ -80,10 +86,6 @@ const OrderDetails = ({ quantities, totalPrice, clearBurger, cancel }) => {
         </>
       ) : (
         <>
-          {errorStatus ? (
-            <TittleStyled>Something went wrong!</TittleStyled>
-          ) : undefined}
-
           <TittleStyled>Burger price: {totalPrice} ₴ </TittleStyled>
           <OrderListStyled>
             {burgerComponents.map((element) => {
@@ -108,7 +110,7 @@ const OrderDetails = ({ quantities, totalPrice, clearBurger, cancel }) => {
             }}
             validationSchema={SignupSchema}
             onSubmit={(values) => handleOrder(values)}>
-            {({ isSubmitting }) => (
+            {({ errors }) => (
               <FormStyled>
                 <LabelStyled>
                   <FieldStyled
@@ -116,6 +118,7 @@ const OrderDetails = ({ quantities, totalPrice, clearBurger, cancel }) => {
                     type="text"
                     name="name"
                     placeholder={"name"}
+                    className={errors.name ? "error" : null}
                   />
                 </LabelStyled>
                 <ErrorMessage name="name" />
@@ -127,6 +130,7 @@ const OrderDetails = ({ quantities, totalPrice, clearBurger, cancel }) => {
                     type="email"
                     name="email"
                     placeholder={"email"}
+                    className={errors.email ? "error" : null}
                   />
                 </LabelStyled>
                 <ErrorMessage name="email" />
@@ -137,6 +141,7 @@ const OrderDetails = ({ quantities, totalPrice, clearBurger, cancel }) => {
                     type="text"
                     name="phone"
                     placeholder={"phone"}
+                    className={errors.phone ? "error" : null}
                   />
                 </LabelStyled>
                 <ErrorMessage name="phone" />
@@ -147,6 +152,7 @@ const OrderDetails = ({ quantities, totalPrice, clearBurger, cancel }) => {
                     type="text"
                     name="address"
                     placeholder="address"
+                    className={errors.address ? "error" : null}
                   />
                 </LabelStyled>
                 <ErrorMessage name="address" />
@@ -172,7 +178,7 @@ const OrderDetails = ({ quantities, totalPrice, clearBurger, cancel }) => {
   );
 };
 const StatusBox = styled.div({
-  padding: "20px",
+  padding: "10px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -180,14 +186,13 @@ const StatusBox = styled.div({
 });
 const WrapperStyled = styled.div({
   width: "400px",
-
-  background: "#fff",
+  padding: "0",
   margin: "10px 20px 20px",
 });
-const TittleStyled = styled.h3({
-  color: "#FF6B0B",
-  margin: "5px",
-});
+const TittleStyled = styled.h3`
+  color: ${(props) => (props.className === "done" ? "green" : "red")};
+  margin: 30px;
+`;
 const OrderListStyled = styled.ul({
   listStyle: "none",
   padding: 0,
@@ -207,14 +212,25 @@ const LabelStyled = styled.label({
   alignItems: "center",
 });
 
-const FieldStyled = styled(Field)({
-  fontFamily: "Monsterrat Medium",
-  height: "50px",
-  border: "none",
-  borderBottom: "2px solid lightgrey",
-  textIndent: "10px",
-  width: "100%",
-});
+// const FieldStyled = styled(Field)({
+//   fontFamily: "Monsterrat Medium",
+//   height: "50px",
+//   border: "none",
+//   borderBottom: "2px solid lightgrey",
+//   textIndent: "10px",
+//   width: "100%",
+// });
+
+const FieldStyled = styled(Field)`
+  font-family: Monsterrat Medium;
+  height: 50px;
+  border: none;
+  border-bottom: 2px solid lightgrey;
+  border-bottom-color: ${(props) =>
+    props.className === "error" ? "red" : "lightgrey"};
+  text-indent: 10px;
+  width: 100%;
+`;
 
 const FormStyled = styled(Form)({
   display: "flex",
