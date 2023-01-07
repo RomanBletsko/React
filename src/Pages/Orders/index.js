@@ -136,7 +136,7 @@ const BoxDetailStyled = styled.div({
   display: "flex",
   justifyContent: "space-between",
   padding: "5px",
-  width: "40%",
+  width: "50%",
   background: "#ddd",
   color: "#000",
   minHeight: "80px",
@@ -162,10 +162,12 @@ const ListStyled = styled.ul({
   height: "90%",
   color: "#fff",
   textAlign: "left",
+  background: "rgba(100, 100, 100, 0.4)",
+  borderRadius: "5px",
 });
 const ItemStyled = styled.li({
   padding: "5px",
-  width: "100%",
+  width: "80%",
 });
 
 export default Orders;
