@@ -212,21 +212,12 @@ const LabelStyled = styled.label({
   alignItems: "center",
 });
 
-// const FieldStyled = styled(Field)({
-//   fontFamily: "Monsterrat Medium",
-//   height: "50px",
-//   border: "none",
-//   borderBottom: "2px solid lightgrey",
-//   textIndent: "10px",
-//   width: "100%",
-// });
-
 const FieldStyled = styled(Field)`
-  font-family: Monsterrat Medium;
+  font-family: Arial;
   height: 50px;
-  border: none;
-  border-bottom: 2px solid lightgrey;
-  border-bottom-color: ${(props) =>
+  border: 2px solid lightgrey;
+  border-radius: 5px;
+  border-color: ${(props) =>
     props.className === "error" ? "red" : "lightgrey"};
   text-indent: 10px;
   width: 100%;
