@@ -15,17 +15,16 @@ const Contact = () => {
         const contacts = await Object.entries(data[0]);
         contacts.splice(0, 2);
         const local = contacts.splice(5, 1);
-        setLocation(Object.entries(local[0][1]));
+        setLocation(Object.entries(local[0]));
         setContact(contacts);
         setLoading(false);
-        console.log(location);
       } catch (error) {
         console.error(error);
       }
     };
     responce();
   }, []);
-
+  console.log(location);
   return (
     <Wrapper>
       <Tittle>Contacts</Tittle>
@@ -44,9 +43,15 @@ const Contact = () => {
             })}
           </ListStyled>{" "}
           <>
-            <SpanStyled>{location[0]} : </SpanStyled>
-
-            {/* {console.log(Object.enterys(location[1]))} */}
+            <SpanStyled>{location[0][1]} : </SpanStyled>
+            {Object.entries(location[1][1]).map((el) => {
+              return (
+                <div key={"location" + el}>
+                  <SpanStyled>{el[0]} : </SpanStyled>
+                  <SpanStyled>{el[1]} : </SpanStyled>
+                </div>
+              );
+            })}
           </>
         </>
       )}

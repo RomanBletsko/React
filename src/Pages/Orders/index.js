@@ -31,11 +31,19 @@ const Orders = () => {
     responce();
   }, []);
   const validatin = (index) => {
-    if (orders[index].orderName) {
-      return true;
+    if (!orders[index].orderName) {
+      return false;
+    } else if (!orders[index].orderPhone) {
+      return false;
+    } else if (!orders[index].orderPrice) {
+      return false;
+    } else if (!orders[index].orderAddress) {
+      return false;
+    } else if (!orders[index].orderProducts) {
+      return false;
     }
 
-    return false;
+    return true;
   };
   const openDetails = (event) => {
     if (validatin(+event.target.dataset.index)) {
